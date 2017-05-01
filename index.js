@@ -50,39 +50,45 @@ const emojisByCategory = mapValues(groupedAndSorted, group => group.map(charFrom
 
 const CATEGORIES = ['People', 'Nature', 'Foods', 'Activity', 'Places', 'Objects', 'Symbols', 'Flags']
 
-
 class EmojiPicker extends Component {
   state = {
-    categories: CATEGORIES.slice(0, 1),
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timeout)
-  }
-
-  loadNextCategory() {
-    if (this.state.categories.length < CATEGORIES.length) {
-      this.setState({categories: CATEGORIES.slice(0, this.state.categories.length + 1)})
-    }
+    selectedCategory: 'People'
   }
 
   renderCategory(category) {
     return (
-      <EmojiCategory 
+      <EmojiCategory
         {...this.props}
-        key={category}
         category={category}
-        finishedLoading={() => this._timeout = setTimeout(this.loadNextCategory.bind(this), 100)} />
+      />
       )
+  }
+
+  renderCategoryOption (category) {
+    const style = [
+      styles.headerText,
+      this.state.selectedCategory === category ? styles.selectedHeaderText : null
+    ];
+
+    return (
+      <TouchableOpacity
+        style={ styles.category }
+        key={ category }
+        onPress={ () => this.setState({ selectedCategory: category }) }>
+        <Text style={ style }>{ category }</Text>
+      </TouchableOpacity>
+    );
   }
 
   render() {
     return (
       <View style={[styles.container, this.props.style]}>
-        <ScrollView horizontal={true}>
-          {this.state.categories.map(this.renderCategory.bind(this))}
+        <View style={ styles.categories }>
+          { CATEGORIES.map(this.renderCategoryOption.bind(this)) }
+        </View>
+        <ScrollView horizontal>
+          { this.renderCategory(this.state.selectedCategory) }
         </ScrollView>
-        {this.props.hideClearButton ? null : <ClearButon {...this.props} />}
       </View>
     )
   }
@@ -90,9 +96,6 @@ class EmojiPicker extends Component {
 }
 
 class EmojiCategory extends Component {
-  componentDidMount() {
-    this.props.finishedLoading()
-  }
 
   render() {
     let emojis = emojisByCategory[this.props.category]
@@ -107,32 +110,17 @@ class EmojiCategory extends Component {
     }
 
     return (
-     <View style={style.categoryOuter}>
-        <Text style={[styles.headerText, this.props.headerStyle]}>{this.props.category}</Text>
-        <View style={styles.categoryInner}>
-          {emojis.map(e => 
-            <Text style={style} 
-              key={e} 
-              onPress={() => this.props.onEmojiSelected(e)}>
-              {e}
-            </Text>
-          )}
-        </View>    
-      </View>
+      <View style={styles.categoryInner}>
+        {emojis.map(e =>
+          <Text style={style} 
+            key={e} 
+            onPress={() => this.props.onEmojiSelected(e)}>
+            {e}
+          </Text>
+        )}
+      </View>    
     )
   }
-}
-
-
-const ClearButon = props => {
-  return (
-    <TouchableOpacity 
-      onPress={() => props.onEmojiSelected(null)}>
-      <Text style={[styles.clearButton, props.clearButtonStyle]}>
-        {props.clearButtonText || 'Clear'}
-      </Text>
-    </TouchableOpacity>
-  )
 }
 
 const EmojiOverlay = props => (
@@ -147,13 +135,7 @@ const EmojiOverlay = props => (
 let styles = StyleSheet.create({
   container: {
     padding: padding,
-  },
-  clearButton: {
-    flex: 1,
-    padding: 15,
-    textAlign: 'center',
-    color: 'black',
-    textAlignVertical: 'center',
+    flexDirection: 'row'
   },
   absolute: {
     position: 'absolute',
@@ -176,20 +158,25 @@ let styles = StyleSheet.create({
     backgroundColor: 'grey',
     opacity: 0.5,
   },
-  categoryOuter: {
-    flex: -1,
-  },
   categoryInner: {
     flex: 1,
-    flexWrap: 'wrap', 
-    flexDirection: 'column',
+    flexWrap: 'wrap'
+  },
+  categories: {
+    width: 80
+  },
+  category: {
+    flex: 1,
+    justifyContent: 'center'
   },
   headerText: {
     padding: padding,
-    color: 'black',
-    justifyContent: 'center',
-    textAlignVertical: 'center',
+    color: '#432B52'
   },
+  selectedHeaderText: {
+    color: '#432B52',
+    fontWeight: 'bold'
+  }
 })
 
 EmojiPicker.propTypes = {

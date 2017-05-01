@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:yonahforst/react-native-emoji-picker.git"
+    "url": "git@github.com:despreston/react-native-emoji-picker.git"
   },
   "keywords": [
     "react-native",
@@ -23,10 +23,6 @@
     "lodash": "^4.11.1",
     "string.fromcodepoint": "^0.2.1"
   },
-  "author": "Yonah Forst <yonaforst@hotmail.com> (https://github.com/yonahforst)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/yonahforst/react-native-emoji-picker/issues"
-  },
-  "homepage": "https://github.com/ryonahforst/react-native-emoji-picker"
+  "author": "Des Preston <despreston@gmail.com> (https://github.com/despreston)",
+  "license": "MIT"
 }

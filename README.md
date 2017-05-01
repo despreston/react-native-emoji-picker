@@ -34,7 +34,6 @@ class Main extends React.Component {
 - `onEmojiSelected` (Function) - Required. Called when the user taps on an emoji.
 - `style` (Object) - Optional. Standard view style for the enclosing component.
 - `clearButtonText` (String) - Optional. Alternate text for the clear button. Defaults to 'Clear'.
-- `hideClearButton` (Bool) - Optional. Hide the clear button. 
 - `rows` (Number) - Optional. Number of rows used to show all emojis. Defaults to 7.
 
 ### EmojiOverlay component
