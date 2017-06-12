@@ -125,7 +125,11 @@ class EmojiCategory extends Component {
 
 const EmojiOverlay = props => (
   <View style={[styles.absolute, props.visible ? styles.visible : styles.hidden]}>
-    <TouchableOpacity style={styles.absolute} onPress={props.onTapOutside}>
+    <TouchableOpacity
+      activeOpacity={1}
+      style={styles.absolute}
+      onPress={props.onTapOutside}
+    >
       <View style={styles.background} />
     </TouchableOpacity>
     {props.visible ? <EmojiPicker {...props}/> : null}
