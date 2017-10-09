@@ -1,6 +1,6 @@
 {
   "name": "react-native-emoji-picker",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Simple emoji picker for react-native",
   "main": "index.js",
   "repository": {
@@ -15,10 +15,11 @@
     "emoji-picker"
   ],
   "devDependencies": {
-    "react": "^15.2.0",
-    "react-native": "^0.30.0"
+    "react": "^16.0.0",
+    "react-native": "0.49.3"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "emoji-datasource": "^2.4.4",
     "lodash": "^4.11.1",
     "string.fromcodepoint": "^0.2.1"

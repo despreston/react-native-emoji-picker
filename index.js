@@ -1,8 +1,6 @@
 'use strict'
-import React, {
-  PropTypes,
-  Component,
-} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 
 import {
   StyleSheet,
@@ -112,13 +110,13 @@ class EmojiCategory extends Component {
     return (
       <View style={styles.categoryInner}>
         {emojis.map(e =>
-          <Text style={style} 
-            key={e} 
+          <Text style={style}
+            key={e}
             onPress={() => this.props.onEmojiSelected(e)}>
             {e}
           </Text>
         )}
-      </View>    
+      </View>
     )
   }
 }
